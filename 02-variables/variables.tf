@@ -1,6 +1,6 @@
 variable "ami_id" {
   type        = string
-  default     = "ami-0055977a6e828a4f4"
+  #default     = "ami-0055977a6e828a4f4"
   description = "AMI ID of the instacne"
 }
 
@@ -8,6 +8,11 @@ variable "instance_type" {
   type        = string
   default     = "t3.micro"
   description = "Instance type of EC2"
+
+  validation {
+    condition     = contains(["t3.micro", "t3.small", "t3.large"], var.instance_type)
+    error_message = "Instance type must be one of t3.micro, t3.small, t3.large"
+  }
 }
 
 variable "ec2_tags" {
@@ -28,5 +33,5 @@ variable "cidr" {
 
 variable "from_port" {
     type = number
-    default = 0
+    #default = 0
 }
